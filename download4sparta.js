@@ -1,0 +1,25 @@
+const GitHubApi = require("github");
+const download = require('download');
+const fs = require('fs');
+const unzip = require('unzip');
+const execFile = require('child_process').execFile;
+
+const github = new GitHubApi({
+    // optional
+    protocol: "https",
+    host: "api.github.com",
+    timeout: 5000,
+    headers: {
+        "user-agent": "NewPascal-App"
+    }
+});
+
+github.repos.getLatestRelease({user:'dathox',repo:'newpascal'},function(err,res){
+  download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('fpc.zip'))
+  .on('close', function () {
+    fs.createReadStream('fpc.zip').pipe(unzip.Extract({ path: '.' }))
+      .on('close', function () {
+        execFile(process.cwd() + '\\newpascal\\configure.bat', [], {cwd: process.cwd() + '\\newpascal'});
+      });
+  });
+});
