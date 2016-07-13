@@ -17,6 +17,6 @@ const github = new GitHubApi({
 github.repos.getLatestRelease({user:'newpascal-ccr',repo:'mORMot'},function(err,res){
   download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('sqlite3fpc.zip'))
   .on('close', function () {
-    fs.createReadStream('sqlite3fpc.zip').pipe(unzip.Extract({ path: 'newpascal\ccr\mORMot' }));
+    fs.createReadStream('sqlite3fpc.zip').pipe(unzip.Extract({ path: 'newpascal/ccr/mORMot' }));
   });
 });
