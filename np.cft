@@ -1,0 +1,19 @@
+
+# -----------------------
+# mORMot
+# -----------------------
+
+-Fu%mormotpath%
+-Fi%mormotpath%
+-Fu%mormotpath%\SQLite3
+-Fu%mormotpath%\CrossPlatform
+-Fu%mormotpath%\SQLite3\DDD\dom
+-Fu%mormotpath%\SQLite3\DDD\infra
+-Fu%mormotpath%\SQLite3\DDD\tools
+-Fu%mormotpath%\SynDBDataset
+
+# -----------------------
+# Generics.Collections
+# -----------------------
+
+-Fu%genericscollectionsspath%
