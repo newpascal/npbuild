@@ -13,6 +13,16 @@ const github = new GitHubApi({
     }
 });
 
+const github2 = new GitHubApi({
+    // optional
+    protocol: "https",
+    host: "api.github.com",
+    timeout: 5000,
+    headers: {
+        "user-agent": "NewPascal-App"
+    }
+});
+
 github.repos.getLatestRelease({user:'dathox',repo:'newpascal'},function(err,res){
   download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('fpc.zip'))
   .on('close', function () {
@@ -24,7 +34,7 @@ github.repos.getLatestRelease({user:'dathox',repo:'newpascal'},function(err,res)
   });
 });
 
-github.repos.getLatestRelease({user:'dathox',repo:'sparta'},function(err,res){
+github2.repos.getLatestRelease({user:'dathox',repo:'sparta'},function(err,res){
   download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('sparta.zip'))
   .on('close', function () {
     fs.createReadStream('sparta.zip').pipe(unzip.Extract({ path: 'newpascal' }));
