@@ -14,12 +14,12 @@ const github = new GitHubApi({
     }
 });
 
-github.repos.getLatestRelease({user:'dathox',repo:'newpascal'},function(err,res){
+github.repos.getLatestRelease({user:'newpascal',repo:'freepascal'},function(err,res){
   download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('fpc.zip'))
   .on('close', function () {
     fs.createReadStream('fpc.zip').pipe(unzip.Extract({ path: '.' }))
       .on('close', function () {
-        execFile(process.cwd() + '\\newpascal\\configure.bat', [], {cwd: process.cwd() + '\\newpascal'});
+        execFile(process.cwd() + '\\freepascal\\configure.bat', [], {cwd: process.cwd() + '\\freepascal'});
       });
   });
 });
