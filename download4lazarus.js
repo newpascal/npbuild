@@ -14,7 +14,7 @@ const github = new GitHubApi({
     }
 });
 
-github.repos.getLatestRelease({user:'newpascal',repo:'freepascal'},function(err,res){
+github.repos.getLatestRelease({owner:'newpascal',repo:'freepascal'},function(err,res){
   download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('fpc.zip'))
   .on('close', function () {
     fs.createReadStream('fpc.zip').pipe(unzip.Extract({ path: '.' }))
