@@ -14,18 +14,18 @@ const github = new GitHubApi({
 });
 
 github.repos.getLatestRelease({owner:'newpascal',repo:'freepascal'},function(err,res){
-  download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('fpc.zip'))
+  download(res.data.assets[0].browser_download_url).pipe(fs.createWriteStream('fpc.zip'))
   .on('close', function () {
     fs.createReadStream('fpc.zip').pipe(unzip.Extract({ path: '.' }));
   });
-  download(res.assets[1].browser_download_url).pipe(fs.createWriteStream('fpcsrc.zip'))
+  download(res.data.assets[1].browser_download_url).pipe(fs.createWriteStream('fpcsrc.zip'))
   .on('close', function () {
     fs.createReadStream('fpcsrc.zip').pipe(unzip.Extract({ path: 'freepascal/fpcsrc' }));
   });
 });
 
 github.repos.getLatestRelease({owner:'newpascal',repo:'lazarus'},function(err,res){
-  download(res.assets[0].browser_download_url).pipe(fs.createWriteStream('lazarus.zip'))
+  download(res.data.assets[0].browser_download_url).pipe(fs.createWriteStream('lazarus.zip'))
   .on('close', function () {
     fs.createReadStream('lazarus.zip').pipe(unzip.Extract({ path: 'freepascal' }));
   });
