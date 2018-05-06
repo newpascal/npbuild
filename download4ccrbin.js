@@ -1,4 +1,4 @@
-const GitHubApi = require("github");
+const GitHubApi = require("@octokit/rest");
 const download = require('download');
 const fs = require('fs');
 const unzip = require('unzip');
